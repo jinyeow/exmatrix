@@ -27,14 +27,22 @@ iex> matrix = [[0, 0], [1,1]]
 [[0, 0], [1,1]]
 ```
 
-To get an empty matrix you can use ```new_matrix``` to generate a zero-filled matrix
+To get an empty matrix you can use `new_matrix` to generate a zero-filled matrix
 
 ```elixir
 iex> ExMatrix.new_matrix(2,2)
 [[0, 0], [0,0]]
 ```
 
-To test out the library, you can generate a random matrix using ```random_cells``` by passing the number of rows, columns and a maximum value to be contained in each cell.
+To get an identity matrix of size N use `identity_matrix` to generate the
+corresponding identity matrix.
+
+```elixir
+iex> matrix = ExMatrix.identity_matrix(3)
+[[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+```
+
+To test out the library, you can generate a random matrix using `random_cells` by passing the number of rows, columns and a maximum value to be contained in each cell.
 
 ```elixir
 iex> random_cells(2, 2, 10)
@@ -44,7 +52,7 @@ iex> random_cells(2, 2, 10)
 
 ### Multiplication
 
-To multiply two matrices together you can call either ```multiply``` or ```pmultiply``` if you wish to do the multiplication in parallel.
+To multiply two matrices together you can call either `multiply` or `pmultiply` if you wish to do the multiplication in parallel.
 
 ```elixir
 iex> matrix_a = [[2,3], [3,5]]
@@ -57,7 +65,7 @@ iex> ExMatrix.muliply(matrix_a, matrix_b)
 
 ### Addition
 
-Addition of matrices happens as you might expect, with the ```add``` function
+Addition of matrices happens as you might expect, with the `add` function
 
 ```elixir
 iex> matrix_a = [[0, 1, 2], [9, 8, 7]]
@@ -67,12 +75,12 @@ iex> matrix_b = [[6, 5, 4], [3, 4, 5]]
 iex> ExMatrix.add(matrix_a, matrix_b)
 [[6, 6, 6], [12, 12, 12]]
 ```
-If you provide two matrices where the number of rows or columns differs, then an ```ArgumentError``` is raised.
+If you provide two matrices where the number of rows or columns differs, then an `ArgumentError` is raised.
 
 
 ### Subtraction
 
-Subtraction is performed on two matrices (which must have the same dimentions) by using the ```subtract``` function
+Subtraction is performed on two matrices (which must have the same dimentions) by using the `subtract` function
 
 ```elixir
 iex> matrix_a = [[0, 1, 2], [9, 8, 7]]
@@ -84,14 +92,14 @@ iex> ExMatrix.subtract(matrix_a, from_matrix)
 ```
 
 
-If you provide two matrices where the number of rows or columns differs, then an ```ArgumentError``` is raised.
+If you provide two matrices where the number of rows or columns differs, then an `ArgumentError` is raised.
 
 
 ### Utility functions
 
 #### Size
 
-The ```size``` function will return the number of rows and columns in your matrix.
+The `size` function will return the number of rows and columns in your matrix.
 
 ```elixir
 iex> {rows, cols} = ExMatrix.size([[1,2,3], [4, 5, 6], [7, 8, 9]])
@@ -113,7 +121,7 @@ iex> ExMatrix.transpose([[1,2,3], [4, 5, 6], [7, 8, 9]])
 
 ## Benchmarks
 
-The initial aim of ExMatrix was to benchmark how well it performed when scaled across a differing number of CPU cores.  Rather than measure the number-crunching ability of Elixir, the benchmarks included measure how well it performs when large matrices are multiplied on 1, 2, 4 and 8 cores.  
+The initial aim of ExMatrix was to benchmark how well it performed when scaled across a differing number of CPU cores.  Rather than measure the number-crunching ability of Elixir, the benchmarks included measure how well it performs when large matrices are multiplied on 1, 2, 4 and 8 cores.
 
 You can run the benchmarks yourself using the mix bench command.
 
@@ -122,12 +130,12 @@ You can run the benchmarks yourself using the mix bench command.
 MIX_ENV=prod mix bench
 ```
 
-To try the benchmark with differing numbers of cores, depends on your operating system.  
+To try the benchmark with differing numbers of cores, depends on your operating system.
 
 * OSX - Use Instruments.app where in the Preferences pane you can change the number of active cores.
 * Linux - This [page on stackexchange](http://unix.stackexchange.com/questions/145645/diabling-cpu-cores-on-quad-core-processor-on-linux) describes how to turn off individual cores on linux.
 * Windows - You can turn off individual cores using the steps described [here]
-(http://en.kioskea.net/faq/616-multicore-cpu-how-to-disable-a-core#procedure-when-using-windows-vista-7-and-xp) 
+(http://en.kioskea.net/faq/616-multicore-cpu-how-to-disable-a-core#procedure-when-using-windows-vista-7-and-xp)
 
 
 ### OSX - 8 cores, 16Gb RAM
@@ -136,7 +144,7 @@ The following results show the outcome of running the benchmarks on the author's
 
 #### Total times
 
-The table below shows the times (in ms) as reported by [benchfella](https://github.com/alco/benchfella).  
+The table below shows the times (in ms) as reported by [benchfella](https://github.com/alco/benchfella).
 
 |   | 50x50  |  100x100 | 200x200  | 400x400   |
 |---|---|---|---|---|
