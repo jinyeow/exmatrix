@@ -26,7 +26,7 @@ defmodule ExMatrix do
   """
   @spec new_matrix(number, number) :: [[number]]
   def new_matrix(rows, cols) do
-    for n <- 1 .. rows, do: generate_zero_filled_row(cols)
+    for _ <- 1 .. rows, do: generate_zero_filled_row(cols)
   end
 
 
@@ -151,7 +151,7 @@ defmodule ExMatrix do
   """
   @spec generate_zero_filled_row(integer) :: [number]
   defp generate_zero_filled_row(size) do
-    Enum.map(:lists.seq(1, size), fn(x)-> 0 end)
+    Enum.map(:lists.seq(1, size), fn(_)-> 0 end)
   end
 
   """
@@ -185,8 +185,17 @@ defmodule ExMatrix do
     end)
   end
 
-  """
+  @doc """
   Generates an Identity Matrix with 'size' rows and columns
+
+  For example a 3x3 Identity Matrix,
+
+              1 0 0
+              0 1 0
+              0 0 1
+
+  iex> ExMatrix.identity_matrix(3)
+  [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
   """
   @spec identity_matrix(integer) :: [[number]]
   def identity_matrix(size) do
